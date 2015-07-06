@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author Morgan
  */
-public class DatabaseSetup {
+public class Database {
     protected Connection conn;
 
     protected void openConnection() {
@@ -26,7 +26,7 @@ public class DatabaseSetup {
                         + System.getProperty("file.separator")
                         + "hotelDB;create=true");
             } catch (SQLException ex) {
-                Logger.getLogger(DatabaseSetup.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -38,7 +38,7 @@ public class DatabaseSetup {
                 conn = null;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DatabaseSetup.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
