@@ -5,11 +5,16 @@
  */
 package main;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -18,27 +23,37 @@ import javafx.stage.Stage;
  * @author Morgan
  */
 public class Main extends Application {
+    private Stage primaryStage;
+    private AnchorPane rootLayout;
     
+    /**
+     * Method which is run to start the application
+     * @param primaryStage 
+     */
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
+        this.primaryStage = primaryStage;
+        this.primaryStage.setTitle("Hotel Management System");
+        this.primaryStage.getIcons().add(new Image("file:resources/images/logo_128.png"));
         
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        //Initialise the root layout of the 
+        initRootLayout();
+    }
+    
+    public void initRootLayout() {
+        try {
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("view/RootLayout.fxml"));
+            rootLayout = (AnchorPane) loader.load();
+
+            // Show the scene containing the root layout.
+            Scene scene = new Scene(rootLayout);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
