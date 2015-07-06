@@ -14,7 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
- *
+ * Main Class used to run the Hotel Application
  * @author Morgan
  */
 public class Main extends Application {
