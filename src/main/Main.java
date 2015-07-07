@@ -36,7 +36,7 @@ public class Main extends Application {
         this.primaryStage.setTitle("Hotel Management System");
         this.primaryStage.getIcons().add(new Image("file:resources/images/logo_128.png"));
         
-        //Initialise the root layout of the 
+        //Initialise the root layout of the application 
         initRootLayout();
     }
     
