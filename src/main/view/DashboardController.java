@@ -7,7 +7,6 @@ package main.view;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import main.Main;
 
@@ -16,13 +15,11 @@ import main.Main;
  *
  * @author Kevin
  */
-public class LoginController implements Initializable {
-
-    // Reference to the main application.
+public class DashboardController implements Initializable {
+    
     private Main main;
     
-    
-    /**
+     /**
      * Is called by the main application to give a reference back to itself.
      * 
      * @param main
@@ -31,15 +28,6 @@ public class LoginController implements Initializable {
         this.main = main;
     }
     
-    /**
-     * Called when the user clicks the edit button. Opens a dialog to edit
-     * details for the selected person.
-     */
-    @FXML
-    private void handleLogin() {
-        main.initRootLayout();
-    }
-        
     /**
      * Initializes the controller class.
      */

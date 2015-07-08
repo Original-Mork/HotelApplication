@@ -45,10 +45,10 @@ public class DatabaseTables extends Database{
     /**
      * Opens new connection and run SQL prepared statements for table creation
      */
+    
     public void setupDatabase(){
-        
-        DatabaseTables dbt = new DatabaseTables();
         conn = openConnection();
+        DatabaseTables dbt = new DatabaseTables();
         dbt.createAuthentication();
     }
     

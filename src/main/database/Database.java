@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class Database {
     protected Connection conn;
 
-    protected void openConnection() {
+    protected Connection openConnection() {
         if (conn == null) {
             try {
                 conn = DriverManager.getConnection("jdbc:derby:"
@@ -29,9 +29,10 @@ public class Database {
                 Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        return conn;
     }
 
-    protected void closeConnection() {
+    public void closeConnection() {
         try {
             if (conn != null) {
                 conn.close();

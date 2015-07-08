@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="main.view.DashboardController">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="336.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="30.0">
+         <image>
+            <Image url="@res/grid.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="336.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="120.0">
+         <image>
+            <Image url="@res/news.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="74.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="40.0">
+         <image>
+            <Image url="@res/box.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="74.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="30.0">
+         <image>
+            <Image url="@res/comp.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="205.0" layoutY="95.0" text="Bookings" />
+      <Label layoutX="205.0" layoutY="300.0" text="Services" />
+      <Label layoutX="495.0" layoutY="95.0" text="Rooms" />
+      <Label layoutX="495.0" layoutY="300.0" text="Management" />
+   </children>
+</AnchorPane>

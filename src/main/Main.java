@@ -16,7 +16,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import main.view.DashboardController;
+import main.view.LoginController;
+import main.view.RootLayoutController;
 
 /**
  * Main Class used to run the Hotel Application
@@ -24,7 +28,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private Stage primaryStage;
-    private AnchorPane rootLayout;
+    private BorderPane rootLayout;
     
     /**
      * Method which is run to start the application
@@ -36,8 +40,8 @@ public class Main extends Application {
         this.primaryStage.setTitle("Hotel Management System");
         this.primaryStage.getIcons().add(new Image("file:resources/images/logo_128.png"));
         
-        //Initialise the root layout of the application 
-        initRootLayout();
+        //Initialise the Login of the application 
+        initRootLogin();
     }
     
     public void initRootLayout() {
@@ -45,17 +49,64 @@ public class Main extends Application {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/RootLayout.fxml"));
-            rootLayout = (AnchorPane) loader.load();
+            BorderPane rootLayout = (BorderPane) loader.load();
 
+            // Show the scene containing the root layout.
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
+            
+            // Give the controller access to the main app.
+            RootLayoutController controller = loader.getController();
+            controller.setMain(this);
+
             primaryStage.show();
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    public void initRootLogin() {
+        try {
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("view/Login.fxml"));
+            AnchorPane login = (AnchorPane) loader.load();
+            
+            // Give the controller access to the main app.
+            LoginController controller = loader.getController();
+            controller.setMainApp(this);
+
+            // Show the scene containing the root layout.
+            Scene scene = new Scene(login);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            System.out.println("this stage is reached");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+   
+     public void showPersonOverview() {
+        try {
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("view/Dashboard.fxml"));
+            AnchorPane dashboard = (AnchorPane) loader.load();
+
+            // Set person overview into the center of root layout.
+            rootLayout.setCenter(dashboard);
+            
+             // Give the controller access to the main app.
+        DashboardController controller = loader.getController();
+        controller.setMainApp(this);
+        
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
