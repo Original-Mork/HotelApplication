@@ -5,10 +5,7 @@
  */
 package main.view;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import main.Main;
 
@@ -21,14 +18,6 @@ public class RootLayoutController {
     private Main main;
     //Reference to the dialog stage
     private Stage dialogStage;
-    
-    /**
-     * Initializes the controller class. This method is automatically called
-     * after the fxml file has been loaded.
-     */
-    @FXML
-    private void initialize() {
-    }
 
     /**
      * Sets the stage of this dialog.
@@ -47,5 +36,13 @@ public class RootLayoutController {
      */
     public void setMain(Main main) {
         this.main = main;
+    }
+    
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+     */
+    @FXML
+    private void initialize() {
     }
 }

@@ -88,7 +88,7 @@ public class Main extends Application {
         }
     }
    
-     public void showPersonOverview() {
+     public void showDashOverview() {
         try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();

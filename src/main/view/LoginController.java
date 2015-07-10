@@ -38,6 +38,7 @@ public class LoginController implements Initializable {
     @FXML
     private void handleLogin() {
         main.initRootLayout();
+        main.showDashOverview();
     }
         
     /**

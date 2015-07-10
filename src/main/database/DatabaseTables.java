@@ -189,7 +189,8 @@ public class DatabaseTables extends Database{
                                 + "\"BOOKING_NUMBER_OF_PEOPLE\" VARCHAR(50), "
                                 + "\"ROOM_NUMBER\" VARCHAR(50), "
                                 + "\"BOOKING_START_DATE\" DATE, "
-                                + "\"BOOKING_END_DATE\" DATE "
+                                + "\"BOOKING_END_DATE\" DATE, "
+                                + "\"STAY_COST\" DOUBLE"
                 );
                 createBookingsTable.execute();
                 
@@ -261,7 +262,7 @@ public class DatabaseTables extends Database{
                                 + "FOREIGN KEY (BOOKINGS_REFERENCE_CODE)"
                                 + "REFERENCE BOOKINGS (BOOKINGS_REFERENCE_CODE)"
                                 + "\"DATE_VALID\" DATE, "
-                                + "\"USED\" BOOLEAN"
+                                + "\"VALID\" BOOLEAN"
                 );
                 createServiceLogTable.execute();
                 
