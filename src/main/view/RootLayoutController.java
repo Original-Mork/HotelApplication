@@ -32,7 +32,7 @@ public class RootLayoutController {
     /**
      * Is called by the main application to give a reference back to itself.
      * 
-     * @param Main
+     * @param main
      */
     public void setMain(Main main) {
         this.main = main;

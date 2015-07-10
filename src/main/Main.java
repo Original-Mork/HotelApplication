@@ -12,6 +12,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -28,6 +30,7 @@ import main.view.RootLayoutController;
 public class Main extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
+    private AnchorPane roomOverview;
     
     /**
      * Method which is run to start the application
@@ -40,7 +43,9 @@ public class Main extends Application {
         this.primaryStage.getIcons().add(new Image("file:resources/images/logo_128.png"));
         
         //Initialise the Login of the application 
-        initRootLogin();
+        //initRootLogin();
+        initRootLayout();
+        initComponents();
     }
     
     public void initRootLayout() {
@@ -48,7 +53,7 @@ public class Main extends Application {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/RootLayout.fxml"));
-            BorderPane rootLayout = (BorderPane) loader.load();
+            rootLayout = (BorderPane) loader.load();
 
             // Show the scene containing the root layout.
             // Show the scene containing the root layout.
@@ -56,12 +61,31 @@ public class Main extends Application {
             primaryStage.setScene(scene);
             
             // Give the controller access to the main app.
-            RootLayoutController controller = loader.getController();
-            controller.setMain(this);
+            //RootLayoutController controller = loader.getController();
+            //controller.setMain(this);
 
             primaryStage.show();
             
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void initComponents(){
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("view/RoomOverview.fxml"));
+            roomOverview = (AnchorPane) loader.load();
+            
+            TabPane tabPane = new TabPane();
+            
+            Tab rooms = new Tab();
+            rooms.setText("Rooms");
+            rooms.setContent(roomOverview);
+            tabPane.getTabs().add(rooms);
+            
+            rootLayout.setCenter(tabPane);
+        } catch (IOException e){
             e.printStackTrace();
         }
     }

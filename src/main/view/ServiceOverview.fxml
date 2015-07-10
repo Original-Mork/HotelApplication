@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane dividerPositions="0.0731" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <TextField layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="200.0" />
+                  <Button layoutX="953.0" layoutY="14.0" mnemonicParsing="false" text="Order..." />
+                  <Button layoutX="898.0" layoutY="14.0" mnemonicParsing="false" text="Edit..." />
+                  <Button layoutX="833.0" layoutY="14.0" mnemonicParsing="false" text="Cancel" />
+                  <DatePicker layoutX="290.0" layoutY="14.0" />
+                  <Label layoutX="254.0" layoutY="18.0" text="Date:" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <TableView prefHeight="363.0" prefWidth="632.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn prefWidth="97.0" text="Order ID" />
+                        <TableColumn prefWidth="137.0" text="Room Number" />
+                        <TableColumn prefWidth="118.0" text="Booking Number" />
+                      <TableColumn prefWidth="129.0" text="Service" />
+                        <TableColumn prefWidth="142.0" text="Quantity" />
+                        <TableColumn prefWidth="133.0" text="Cost" />
+                        <TableColumn prefWidth="123.0" text="Order Date" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
