@@ -86,28 +86,6 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-   
-<<<<<<< HEAD
-=======
-     public void showDashOverview() {
-        try {
-            // Load person overview.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("view/Dashboard.fxml"));
-            AnchorPane dashboard = (AnchorPane) loader.load();
-
-            // Set person overview into the center of root layout.
-            rootLayout.setCenter(dashboard);
-            
-             // Give the controller access to the main app.
-        DashboardController controller = loader.getController();
-        controller.setMainApp(this);
-        
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
->>>>>>> origin/master
     
     /**
      * @param args the command line arguments
