@@ -32,7 +32,11 @@ public class DatabaseTables extends Database{
     /**
      * SQL prepared statement to create BOOKINGS table 
      */
-    PreparedStatement createBookingsTable = null; 
+    PreparedStatement createBookingTable = null; 
+    /**
+     * SQL prepared statement to create BOOKINGS table 
+     */
+    PreparedStatement createRoomBookingTable = null;
     /**
      * SQL prepared statement to create BOOKINGS table 
      */
@@ -69,7 +73,7 @@ public class DatabaseTables extends Database{
                         "CREATE TABLE APP.AUTHENTICATION ("
                                 + "\"EMP_ID\" INT NOT NULL PRIMARY KEY "
                                 + "GENERATED ALWAYS AS IDENTITY "
-                                + "(START WITH 100100, INCREMENT BY 1), "
+                                + "(START WITH 900100, INCREMENT BY 1), "
                                 + "\"PASSWORD\" VARCHAR(50), "
                                 + "\"FIRST_NAME\" VARCHAR(50), "
                                 + "\"LAST_NAME\" VARCHAR(50), "
@@ -108,10 +112,7 @@ public class DatabaseTables extends Database{
                 //If the ROOM table does not already exist we create it
                 createRoomTable = conn.prepareStatement(
                         "CREATE TABLE APP.ROOM ("
-                                + "\"ROOM_ID\" INT NOT NULL PRIMARY KEY "
-                                + "GENERATED ALWAYS AS IDENTITY "
-                                + "(START WITH 1, INCREMENT BY 1), "
-                                + "\"ROOM_NUMBER\" VARCHAR(10), "
+                                + "\"ROOM_NUMBER\" VARCHAR(10) NOT NULL PRIMARY KEY, "
                                 + "\"ROOM_TYPE\" VARCHAR(50), "
                                 + "\"ROOM_DESCRIPTION\" VARCHAR(250), "
                                 + "\"ROOM_COST\" DOUBLE"
@@ -138,27 +139,33 @@ public class DatabaseTables extends Database{
         try{
             // Queries database for existing table name and stores within result set
             DatabaseMetaData dbmd = conn.getMetaData();
-            rs = dbmd.getTables(null, "APP", "BOOKINGS", null);
+            rs = dbmd.getTables(null, "APP", "BOOKING", null);
             
             // If table does not exist, proceed to create 
             if (!rs.next()) {
                 //If the BOOKINGS table does not already exist we create it
-                createBookingsTable = conn.prepareStatement(
-                        "CREATE TABLE APP.BOOKINGS ("
-                                + "\"BOOKINGS_REFERENCE_CODE\" INT NOT NULL PRIMARY KEY "
-                                + "GENERATED ALWAYS AS IDENTITY "
-                                + "(START WITH 200100, INCREMENT BY 1), "
+                createBookingTable = conn.prepareStatement(
+                        "CREATE TABLE APP.BOOKING ("
+                                + "\"BOOKING_REFERENCE_CODE\" INT NOT NULL PRIMARY KEY "
+                                    + "GENERATED ALWAYS AS IDENTITY "
+                                    + "(START WITH 100100, INCREMENT BY 1), "
                                 + "\"BOOKING_FIRST_NAME\" VARCHAR(50),"
-                                + "\"BOOKING_LAST_NAME\" VARCHAR(50)"
+                                + "\"BOOKING_LAST_NAME\" VARCHAR(50),"
+                                + "\"BOOKING_NUMBER_OF_PEOPLE\" VARCHAR(50), "
+                                + "\"BOOKING_DATE\" DATE, "
+                                + "\"EMP_ID\" INT "
+                                    + "FOREIGN KEY(EMP_ID) "
+                                    + "REFERENCE AUTHENTICATION (EMP_ID) "
+
                 );
-                createBookingsTable.execute();
+                createBookingTable.execute();
                 
-                // indicate successful creation of BOOKINGS table
-                System.out.println("BOOKINGS table successfully created");
+                // indicate successful creation of BOOKING table
+                System.out.println("BOOKING table successfully created");
             }
             else {
-                // if table already exists, indicate preexistence of BOOKINGS table
-                System.out.println("BOOKINGS table already created previously");
+                // if table already exists, indicate preexistence of BOOKING table
+                System.out.println("BOOKING table already created previously");
             }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseTables.class.getName()).log(Level.SEVERE, null, ex);
@@ -168,38 +175,39 @@ public class DatabaseTables extends Database{
     /**
      * Create BOOKING_DETAILS table if it does not exist already 
      */
-    public void createBookingDetails() {
+    public void createRoomBooking() {
         
         try{
             // Queries database for existing table name and stores within result set
             DatabaseMetaData dbmd = conn.getMetaData();
-            rs = dbmd.getTables(null, "APP", "BOOKING_DETAILS", null);
+            rs = dbmd.getTables(null, "APP", "ROOM_BOOKING", null);
             
             // If table does not exist, proceed to create 
             if (!rs.next()) {
-                //If the BOOKINGS table does not already exist we create it
-                createBookingsTable = conn.prepareStatement(
-                        "CREATE TABLE APP.BOOKING_DETAILS ("
-                                + "\"BOOKINGS_DETAILS_ID\" INT NOT NULL PRIMARY KEY "
-                                + "GENERATED ALWAYS AS IDENTITY "
-                                + "(START WITH 300100, INCREMENT BY 1), "
-                                + "\"BOOKINGS_REFERENCE_CODE\" INT NOT NULL,"
-                                + "FOREIGN KEY(BOOKINGS_REFERENCE_CODE)"
-                                + "REFERENCE BOOKINGS (BOOKINGS_REFERENCE_CODE)"
-                                + "\"BOOKING_NUMBER_OF_PEOPLE\" VARCHAR(50), "
-                                + "\"ROOM_NUMBER\" VARCHAR(50), "
-                                + "\"BOOKING_START_DATE\" DATE, "
-                                + "\"BOOKING_END_DATE\" DATE, "
-                                + "\"STAY_COST\" DOUBLE"
+                //If the ROOM_BOOKING table does not already exist we create it
+                createRoomBookingTable = conn.prepareStatement(
+                        "CREATE TABLE APP.ROOM_BOOKING ("
+                                + "\"ROOM_BOOKING_ID\" INT NOT NULL PRIMARY KEY "
+                                    + "GENERATED ALWAYS AS IDENTITY "
+                                    + "(START WITH 300100, INCREMENT BY 1), "
+                                + "\"BOOKINGS_REFERENCE_CODE\" INT NOT NULL "
+                                    + "FOREIGN KEY(BOOKING_REFERENCE_CODE)"
+                                    + "REFERENCE BOOKING (BOOKING_REFERENCE_CODE)"
+                                + "\"ROOM_NUMBER\" VARCHAR(10)"
+                                    + "FOREIGN KEY(ROOM_NUMBER) "
+                                    + "REFERENCE ROOM (ROOM_NUMBER), "
+                                + "\"START_DATE\" DATE, "
+                                + "\"END_DATE\" DATE, "
+                                
                 );
-                createBookingsTable.execute();
+                createRoomBookingTable.execute();
                 
-                // indicate successful creation of BOOKINGS table
-                System.out.println("BOOKING_DETAILS table successfully created");
+                // indicate successful creation of ROOM_BOOKING table
+                System.out.println("ROOM_BOOKING table successfully created");
             }
             else {
-                // if table already exists, indicate preexistence of BOOKINGS table
-                System.out.println("BOOKING_DETAILS table already created previously");
+                // if table already exists, indicate preexistence of ROOM_BOOKING table
+                System.out.println("ROOM_BOOKING table already created previously");
             }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseTables.class.getName()).log(Level.SEVERE, null, ex);
@@ -207,7 +215,7 @@ public class DatabaseTables extends Database{
     }
     
     /**
-     * Create BOOKING_DETAILS table if it does not exist already 
+     * Create SERVICE table if it does not exist already 
      */
     public void createService() {
         
@@ -240,7 +248,7 @@ public class DatabaseTables extends Database{
     }
     
     /**
-     * Create BOOKING_DETAILS table if it does not exist already 
+     * Create SERVICE_LOG table if it does not exist already 
      */
     public void createServiceLog() {
         
@@ -255,14 +263,19 @@ public class DatabaseTables extends Database{
                 createServiceLogTable = conn.prepareStatement(
                         "CREATE TABLE APP.SERVICE_LOG ("
                                 + "\"SERVICE_LOG_ID\" VARCHAR(50) NOT NULL PRIMARY KEY "
-                                + "\"SERVICE_ID\" VARCHAR(50) NOT NULL,"
-                                + "FOREIGN KEY(SERVICE_ID)"
-                                + "REFERENCE SERVICE (SERVICE_ID)"
                                 + "\"BOOKINGS_REFERENCE_CODE\" INT NOT NULL,"
-                                + "FOREIGN KEY (BOOKINGS_REFERENCE_CODE)"
-                                + "REFERENCE BOOKINGS (BOOKINGS_REFERENCE_CODE)"
+                                    + "FOREIGN KEY (BOOKINGS_REFERENCE_CODE)"
+                                    + "REFERENCE BOOKINGS (BOOKINGS_REFERENCE_CODE)"
+                                + "\"ROOM_NUMBER\" INT NOT NULL "
+                                    + "FOREIGN KEY (ROOM_NUMBER)"
+                                    + "REFERENCE BOOKINGS (ROOM_NUMBER)"
+                                + "\"SERVICE_ID\" VARCHAR(50) NOT NULL"
+                                    + "FOREIGN KEY(SERVICE_ID),"
+                                    + "REFERENCE SERVICE (SERVICE_ID),"
                                 + "\"DATE_VALID\" DATE, "
-                                + "\"VALID\" BOOLEAN"
+                                + "\"EMP_ID\" INT NOT NULL "
+                                    + "FOREIGN KEY(EMP_ID) "
+                                    + "REFERENCE AUTHENTICATION (EMP_ID) "
                 );
                 createServiceLogTable.execute();
                 
