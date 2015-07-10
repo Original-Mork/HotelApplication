@@ -18,7 +18,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import main.view.DashboardController;
 import main.view.LoginController;
 import main.view.RootLayoutController;
 
@@ -88,24 +87,6 @@ public class Main extends Application {
         }
     }
    
-     public void showPersonOverview() {
-        try {
-            // Load person overview.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("view/Dashboard.fxml"));
-            AnchorPane dashboard = (AnchorPane) loader.load();
-
-            // Set person overview into the center of root layout.
-            rootLayout.setCenter(dashboard);
-            
-             // Give the controller access to the main app.
-        DashboardController controller = loader.getController();
-        controller.setMainApp(this);
-        
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     
     /**
      * @param args the command line arguments
