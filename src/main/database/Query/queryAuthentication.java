@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.database;
+package main.database.Query;
 
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import main.database.Database;
+import main.database.DatabaseTables;
 
 /**
  *

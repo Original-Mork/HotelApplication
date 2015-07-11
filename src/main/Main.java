@@ -45,7 +45,7 @@ public class Main extends Application {
         //Initialise the Login of the application 
         //initRootLogin();
         initRootLayout();
-        initComponents();
+        //initComponents();
     }
     
     public void initRootLayout() {
@@ -83,6 +83,11 @@ public class Main extends Application {
             rooms.setText("Rooms");
             rooms.setContent(roomOverview);
             tabPane.getTabs().add(rooms);
+            
+            Tab services = new Tab();
+            services.setText("Services");
+            //services.setContent(roomOverview);
+            tabPane.getTabs().add(services);
             
             rootLayout.setCenter(tabPane);
         } catch (IOException e){

@@ -18,6 +18,8 @@ public class RootLayoutController {
     private Main main;
     //Reference to the dialog stage
     private Stage dialogStage;
+    
+    
 
     /**
      * Sets the stage of this dialog.
